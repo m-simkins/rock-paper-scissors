@@ -24,12 +24,16 @@ Note: Some learners might think that arrays are necessary for this problem, but 
 Test that your function returns what you expect using console.log or the browser developer tools before advancing to the next step.
 
 # Step 3: Write the logic to get the human choice
--Your game will be played by a human player. You will write a function that takes the user choice and returns it.
+Your game will be played by a human player. You will write a function that takes the user choice and returns it.
 
 Create a new function named getHumanChoice.
+
 Write the code so that getHumanChoice will return one of the valid choices depending on what the user inputs.
+
 Hint: Use the prompt method to get the user’s input.
+
 Test what your function returns by using console.log.
+
 # Step 4: Declare the players score variables
 Your game will keep track of the players score. You will write variables to keep track of the players score.
 

@@ -12,3 +12,23 @@ function getComputerChoice() {
 }
 
 console.log(getComputerChoice());
+
+function getHumanChoice() {
+    let choice = prompt("your choice:");
+    switch (choice) {
+        case "rock":
+            return "rock";
+            break;
+        case "paper":
+            return "paper";
+            break;
+        case "scissors":
+            return "scissors";
+            break;
+        default:
+            alert("invalid");
+            break;
+    }
+}
+
+console.log(getHumanChoice());
