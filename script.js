@@ -2,40 +2,33 @@ console.log("Hello World");
 
 function getComputerChoice() {
     let num = Math.floor((Math.random() * 3) + 1);
-    if (num === 1) {
-        return "rock";
-    } else if (num === 2) {
-        return "paper";
-    } else {
-        return "scissors";
+    switch (num) {
+        case 1:
+            return "rock";
+        case 2:
+            return "paper";
+        case 3:
+            return "scissors";
     }
 }
 
 function getHumanChoice() {
     let choice = prompt("your choice:");
     choice = choice.toLowerCase();
-    switch (choice) {
-        case "rock":
-            return "rock";
-            break;
-        case "paper":
-            return "paper";
-            break;
-        case "scissors":
-            return "scissors";
-            break;
-        default:
-            alert("invalid");
-            break;
+    if (choice !== "rock" && choice !== "paper" && choice !== "scissors") {
+        alert("invalid entry, try again");
+    } else {
+        return choice;
     }
 }
 
-let humanScore = 0;
-let computerScore = 0;
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
 
 function playRound(humanChoice, computerChoice) {
-    console.log(computerChoice);
-    console.log(humanChoice);
+    let humanScore = 0;
+    let computerScore = 0;
     if (humanChoice === "rock") {
         if (computerChoice === "paper") {
             computerScore++;
@@ -69,7 +62,4 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
+playRound();
