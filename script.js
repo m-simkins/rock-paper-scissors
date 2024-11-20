@@ -1,63 +1,43 @@
 const choices = ["rock", "paper", "scissors"];
 const choiceButtons = document.getElementById("choice-buttons");
 const resultDisplay = document.getElementById("result-display");
-const startButton = document.getElementById("start-button");
 
-function startGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-    resultDisplay.textContent = `human score: ${humanScore} | computer score: ${computerScore}`;
-}
+let humanScore = 0;
+let computerScore = 0;
+let humanChoice;
+let computerChoice;
+let result;
 
-startButton.addEventListener('click', startGame);
+document.getElementById("human-score").textContent = `human score: ${humanScore}`
 
-function getComputerChoice() {
-    return Math.floor((Math.random() * 3));
-}
-
-function humanWins(humanScore) {
-    console.log(`human wins`);
-    humanScore++;
-    return humanScore;
-}
-
-function computerWins(computerScore) {
-    console.log(`computer wins`);
-    computerScore++;
-    return computerScore;
-}
-
-function gameTies() {
-    console.log(`tie game`);
-}
-
-function playRound(humanChoice, humanScore, computerScore) {
-    console.log(`human score: ${humanScore}`);
-    console.log(`computer score: ${computerScore}`);
-    let computerChoice = getComputerChoice();
-
-    console.log(`humanChoice = ${choices[humanChoice]}`);
-
-    console.log(`computerChoice = ${choices[computerChoice]}`);
-
-    if (humanChoice === computerChoice) {
-        return gameTies();
-    }
-    
-    if (humanChoice === computerChoice + 1 || humanChoice === computerChoice - 2) {
-        return humanWins(humanScore);
-    }
-    
-    if (computerChoice === humanChoice + 1 || humanChouce === computerChoice - 2) {
-        return computerWins(computerScore);
-    }
-}
+document.getElementById("computer-score").textContent = `computer score: ${computerScore}`
 
 choiceButtons.addEventListener("click", (e) => {
-    let humanChoice = Number(e.target.value);
-    playGame(humanChoice);
-});
+    humanChoice = Number(e.target.value);
+    computerChoice = Math.floor((Math.random() * 3));
+    let roundResult;
+    
+    document.getElementById("human-choice").textContent = `human choice: ${choices[humanChoice]}`
 
+    document.getElementById("computer-choice").textContent = `computer choice: ${choices[computerChoice]}`
+
+    if (humanChoice === computerChoice) {
+        roundResult = 'you tie';
+    } else if (humanChoice === computerChoice + 1 || humanChoice === computerChoice - 2) {
+        roundResult = 'you win!';
+        humanScore++;
+    } else {
+        roundResult = 'you lose :C';
+        computerScore++;
+    }
+
+    document.getElementById("round-result").textContent = `${roundResult}`;
+
+    document.getElementById("human-score").textContent = `human score: ${humanScore}`;
+
+    document.getElementById("computer-score").textContent = `computer score: ${computerScore}`;
+
+});
 
 /*function getHumanChoice() {
     let choice = prompt("your choice:");
