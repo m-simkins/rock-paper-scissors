@@ -2,34 +2,34 @@ const choices = ["rock", "paper", "scissors"];
 const choiceButtons = document.getElementById("choice-buttons");
 const resultDisplay = document.getElementById("result");
 
-let humanScore = 0;
+let playerScore = 0;
 let computerScore = 0;
-let humanChoice;
+let playerChoice;
 let computerChoice;
 let gameResult;
 
-const humanScoreDisplay = document.getElementById("human-score");
+const playerScoreDisplay = document.getElementById("player-score");
 const computerScoreDisplay = document.getElementById("computer-score");
-const humanChoiceDisplay = document.getElementById("human-choice");
+const playerChoiceDisplay = document.getElementById("player-choice");
 const computerChoiceDisplay = document.getElementById("computer-choice");
 const gameResultDisplay = document.getElementById("game-result");
 
-humanScoreDisplay.textContent = `human score: ${humanScore}`
-computerScoreDisplay.textContent = `computer score: ${computerScore}`
+playerScoreDisplay.textContent = `${playerScore}`
+computerScoreDisplay.textContent = `${computerScore}`
 
 choiceButtons.addEventListener("click", (e) => {
-    humanChoice = Number(e.target.value);
+    playerChoice = Number(e.target.value);
     computerChoice = Math.floor((Math.random() * 3));
     
-    humanChoiceDisplay.textContent = `you choose ${choices[humanChoice]}`
+    playerChoiceDisplay.textContent = `you choose ${choices[playerChoice]}`
     
     computerChoiceDisplay.textContent = `the computer chooses ${choices[computerChoice]}`
         
-    if (humanChoice === computerChoice) {
+    if (playerChoice === computerChoice) {
         gameResult = 'tie';
-    } else if (humanChoice === computerChoice + 1 || humanChoice === computerChoice - 2) {
+    } else if (playerChoice === computerChoice + 1 || playerChoice === computerChoice - 2) {
         gameResult = 'win';
-        humanScore++;
+        playerScore++;
     } else {
         gameResult = 'lose';
         computerScore++;
@@ -37,12 +37,12 @@ choiceButtons.addEventListener("click", (e) => {
 
     gameResultDisplay.textContent = `you ${gameResult} this round`;
 
-    humanScoreDisplay.textContent = `human score: ${humanScore}`;
+    playerScoreDisplay.textContent = `${playerScore}`;
 
-    computerScoreDisplay.textContent = `computer score: ${computerScore}`;
+    computerScoreDisplay.textContent = `${computerScore}`;
 
-    if (humanScore === 5 || computerScore === 5) {
-        if (humanScore === 5) {
+    if (playerScore === 5 || computerScore === 5) {
+        if (playerScore === 5) {
             gameResultDisplay.textContent = `you win the game`
         } else if (computerScore === 5) {
             gameResultDisplay.textContent = `you lose the game`

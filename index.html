@@ -3,28 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            background-color: #333;
-            color: #ccc;
-            font-family: sans-serif;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
     <title>rock paper scissors</title>
 </head>
 <body>
-    <div id="choice-buttons">
+    <section id="choice-buttons">
         <button id="rock-button" value="0">rock</button>
         <button id="paper-button" value="1">paper</button>
         <button id="scissors-button" value="2">scissors</button>
-    </div>
-    <div id="result">
-        <p id="human-score"></p>
-        <p id="computer-score"></p>
-        <p id="human-choice"></p>
-        <p id="computer-choice"></p>
-        <p id="game-result"></p>
-    </div>
+    </section>
+    <section id="results">
+        <div id="choices">
+            <p id="player-choice"></p>
+            <p id="computer-choice"></p>
+        </div>
+        <div id="scores">
+            <div class="score-group">
+                <p id="player-score" class="score"></p>
+                <p>&nbsp;PLAYER&nbsp;</p>
+            </div>
+            <p id="game-result">make your choice</p>
+            <div class="score-group">
+                <p id="computer-score" class="score"></p>
+                <p>COMPUTER</p>
+            </div>
+        </div>
+    </section>
     <script src="script.js"></script>
 </body>
 </html>
