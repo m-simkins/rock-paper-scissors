@@ -1,33 +1,61 @@
 const choices = ["rock", "paper", "scissors"];
 const choiceButtons = document.getElementById("choice-buttons");
-const rockButton = document.getElementById("rock-button");
-const paperButton = document.getElementById("paper-button");
-const scissorsButton = document.getElementById("scissors-button");
 const resultDisplay = document.getElementById("result-display");
-const humanChoiceDisplay = document.getElementById("human-choice");
-const computerChoiceDisplay = document.getElementById("computer-choice");
-const humanScoreDisplay = document.getElementById("human-score");
-const computerScoreDisplay = document.getElementById("computer-score");
+const startButton = document.getElementById("start-button");
+
+function startGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+    resultDisplay.textContent = `human score: ${humanScore} | computer score: ${computerScore}`;
+}
+
+startButton.addEventListener('click', startGame);
 
 function getComputerChoice() {
     return Math.floor((Math.random() * 3));
 }
 
-function updateDisplay(humanChoice, computerChoice, humanScore, computerScore) {
-    humanChoiceDisplay.textContent = `you chose ${choices[humanChoice]}`;
-    computerChoiceDisplay.textContent = `computer chose ${choices[computerChoice]}`;
-    humanScoreDisplay.textContent = `your score: ${humanScore}`;
-    computerScoreDisplay.textContent = `computer score: ${computerScore}`;
+function humanWins(humanScore) {
+    console.log(`human wins`);
+    humanScore++;
+    return humanScore;
 }
 
-function playRound(humanChoice) {
+function computerWins(computerScore) {
+    console.log(`computer wins`);
+    computerScore++;
+    return computerScore;
+}
+
+function gameTies() {
+    console.log(`tie game`);
+}
+
+function playRound(humanChoice, humanScore, computerScore) {
+    console.log(`human score: ${humanScore}`);
+    console.log(`computer score: ${computerScore}`);
     let computerChoice = getComputerChoice();
 
+    console.log(`humanChoice = ${choices[humanChoice]}`);
+
+    console.log(`computerChoice = ${choices[computerChoice]}`);
+
+    if (humanChoice === computerChoice) {
+        return gameTies();
+    }
+    
+    if (humanChoice === computerChoice + 1 || humanChoice === computerChoice - 2) {
+        return humanWins(humanScore);
+    }
+    
+    if (computerChoice === humanChoice + 1 || humanChouce === computerChoice - 2) {
+        return computerWins(computerScore);
+    }
 }
 
 choiceButtons.addEventListener("click", (e) => {
-    let humanChoice = e.target.value;
-    playRound(humanChoice);
+    let humanChoice = Number(e.target.value);
+    playGame(humanChoice);
 });
 
 
