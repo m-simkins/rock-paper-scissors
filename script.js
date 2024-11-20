@@ -17,14 +17,12 @@ const gameResultDisplay = document.getElementById("game-result");
 playerScoreDisplay.textContent = `${playerScore}`
 computerScoreDisplay.textContent = `${computerScore}`
 
-choiceButtons.addEventListener("click", (e) => {
-    playerChoice = Number(e.target.value);
-    computerChoice = Math.floor((Math.random() * 3));
-    
-    playerChoiceDisplay.textContent = `you choose ${choices[playerChoice]}`
-    
-    computerChoiceDisplay.textContent = `the computer chooses ${choices[computerChoice]}`
-        
+function displayChoices(playerChoice, computerChoice) {
+    playerChoiceDisplay.textContent = `${choices[playerChoice]}`
+    computerChoiceDisplay.textContent = `${choices[computerChoice]}`
+}
+
+function compareChoices(playerChoice, computerChoice) {
     if (playerChoice === computerChoice) {
         gameResult = 'tie';
     } else if (playerChoice === computerChoice + 1 || playerChoice === computerChoice - 2) {
@@ -34,6 +32,15 @@ choiceButtons.addEventListener("click", (e) => {
         gameResult = 'lose';
         computerScore++;
     }
+}
+
+choiceButtons.addEventListener("click", (e) => {
+    playerChoice = Number(e.target.value);
+    computerChoice = Math.floor((Math.random() * 3));
+    
+    displayChoices(playerChoice, computerChoice);
+
+    compareChoices(playerChoice, computerChoice);
 
     gameResultDisplay.textContent = `you ${gameResult} this round`;
 

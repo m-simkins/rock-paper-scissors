@@ -62,5 +62,6 @@ body {
 #choices > p {
     width: 50%;
     text-align: center;
+    font-size: 2rem;
 }
 
