@@ -1,48 +1,51 @@
 const choices = ["rock", "paper", "scissors"];
 const choiceButtons = document.getElementById("choice-buttons");
-const resultDisplay = document.getElementById("result-display");
+const resultDisplay = document.getElementById("result");
 
 let humanScore = 0;
 let computerScore = 0;
 let humanChoice;
 let computerChoice;
-let result;
+let gameResult;
 
-document.getElementById("human-score").textContent = `human score: ${humanScore}`
+const humanScoreDisplay = document.getElementById("human-score");
+const computerScoreDisplay = document.getElementById("computer-score");
+const humanChoiceDisplay = document.getElementById("human-choice");
+const computerChoiceDisplay = document.getElementById("computer-choice");
+const gameResultDisplay = document.getElementById("game-result");
 
-document.getElementById("computer-score").textContent = `computer score: ${computerScore}`
+humanScoreDisplay.textContent = `human score: ${humanScore}`
+computerScoreDisplay.textContent = `computer score: ${computerScore}`
 
 choiceButtons.addEventListener("click", (e) => {
     humanChoice = Number(e.target.value);
     computerChoice = Math.floor((Math.random() * 3));
     
-    document.getElementById("human-choice").textContent = `human choice: ${choices[humanChoice]}`
+    humanChoiceDisplay.textContent = `you choose ${choices[humanChoice]}`
     
-    document.getElementById("computer-choice").textContent = `computer choice: ${choices[computerChoice]}`
-    
-    let roundResult;
-    
+    computerChoiceDisplay.textContent = `the computer chooses ${choices[computerChoice]}`
+        
     if (humanChoice === computerChoice) {
-        roundResult = 'tie';
+        gameResult = 'tie';
     } else if (humanChoice === computerChoice + 1 || humanChoice === computerChoice - 2) {
-        roundResult = 'win';
+        gameResult = 'win';
         humanScore++;
     } else {
-        roundResult = 'lose';
+        gameResult = 'lose';
         computerScore++;
     }
 
-    document.getElementById("round-result").textContent = `you ${roundResult} this round`;
+    gameResultDisplay.textContent = `you ${gameResult} this round`;
 
-    document.getElementById("human-score").textContent = `human score: ${humanScore}`;
+    humanScoreDisplay.textContent = `human score: ${humanScore}`;
 
-    document.getElementById("computer-score").textContent = `computer score: ${computerScore}`;
+    computerScoreDisplay.textContent = `computer score: ${computerScore}`;
 
     if (humanScore === 5 || computerScore === 5) {
         if (humanScore === 5) {
-            document.getElementById("game-result").textContent = `you win the game`
+            gameResultDisplay.textContent = `you win the game`
         } else if (computerScore === 5) {
-            document.getElementById("game-result").textContent = `you lose the game`
+            gameResultDisplay.textContent = `you lose the game`
         }
     }
 });
