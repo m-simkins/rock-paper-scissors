@@ -1,23 +1,37 @@
-let humanScore = 0;
-let computerScore = 0;
+const choices = ["rock", "paper", "scissors"];
+const choiceButtons = document.getElementById("choice-buttons");
+const rockButton = document.getElementById("rock-button");
+const paperButton = document.getElementById("paper-button");
+const scissorsButton = document.getElementById("scissors-button");
+const resultDisplay = document.getElementById("result-display");
+const humanChoiceDisplay = document.getElementById("human-choice");
+const computerChoiceDisplay = document.getElementById("computer-choice");
+const humanScoreDisplay = document.getElementById("human-score");
+const computerScoreDisplay = document.getElementById("computer-score");
 
 function getComputerChoice() {
-    let num = Math.floor((Math.random() * 3) + 1);
-    switch (num) {
-        case 1:
-            return "rock";
-        case 2:
-            return "paper";
-        case 3:
-            return "scissors";
-    }
+    return Math.floor((Math.random() * 3));
 }
 
-const choiceButtons = document.getElementById("choice-buttons");
+function updateDisplay(humanChoice, computerChoice, humanScore, computerScore) {
+    humanChoiceDisplay.textContent = `you chose ${choices[humanChoice]}`;
+    computerChoiceDisplay.textContent = `computer chose ${choices[computerChoice]}`;
+    humanScoreDisplay.textContent = `your score: ${humanScore}`;
+    computerScoreDisplay.textContent = `computer score: ${computerScore}`;
+}
+
+function playRound(humanChoice) {
+    let computerChoice = getComputerChoice();
+
+}
+
+choiceButtons.addEventListener("click", (e) => {
+    let humanChoice = e.target.value;
+    playRound(humanChoice);
+});
 
 
-
-/* function getHumanChoice() {
+/*function getHumanChoice() {
     let choice = prompt("your choice:");
     choice = choice.toLowerCase();
     if (choice !== "rock" && choice !== "paper" && choice !== "scissors") {
@@ -25,14 +39,6 @@ const choiceButtons = document.getElementById("choice-buttons");
     } else {
         return choice;
     }
-} */
-
-const rockButton = document.getElementById("rock-button");
-const paperButton = document.getElementById("paper-button");
-const scissorsButton = document.getElementById("scissors-button");
-
-function getHumanChoice(humanChoice) {
-
 }
 
 function youWin(humanChoice, computerChoice) {
@@ -94,5 +100,4 @@ function playGame () {
         console.log(`you tied... so nobody wins`);
     }
 }
-
-playGame();
+    */
