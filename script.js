@@ -17,14 +17,7 @@ let gameResult;
 playerScoreDisplay.textContent = `${playerScore}`
 computerScoreDisplay.textContent = `${computerScore}`
 
-
-
-function displayChoices(playerChoice, computerChoice) {
-    playerChoiceDisplay.textContent = `${choices[playerChoice]}`
-    computerChoiceDisplay.textContent = `${choices[computerChoice]}`
-}
-
-function compareChoices(playerChoice, computerChoice) {
+function playRound(playerChoice, computerChoice) {
     if (playerChoice === computerChoice) {
         gameResult = 'tie';
     } else if (playerChoice === computerChoice + 1 || playerChoice === computerChoice - 2) {
@@ -36,7 +29,11 @@ function compareChoices(playerChoice, computerChoice) {
     }
 }
 
-function displayResults(gameResult, playerScore, computerScore) {
+function displayResults(playerChoice, computerChoice, gameResult, playerScore, computerScore) {
+    playerChoiceDisplay.textContent = `${choices[playerChoice]}`
+    
+    computerChoiceDisplay.textContent = `${choices[computerChoice]}`
+
     gameResultDisplay.textContent = `you ${gameResult} this round`;
 
     playerScoreDisplay.textContent = `${playerScore}`;
@@ -56,17 +53,11 @@ choiceButtons.addEventListener("click", (e) => {
     playerChoice = Number(e.target.value);
     computerChoice = Math.floor((Math.random() * 3));
     
-    displayChoices(playerChoice, computerChoice);
+    playRound(playerChoice, computerChoice);
 
-    compareChoices(playerChoice, computerChoice);
-
-    displayResults(gameResult, playerScore, computerScore);
+    displayResults(playerChoice, computerChoice, gameResult, playerScore, computerScore);
 
     if (playerScore === 5 || computerScore === 5) {
-        if (playerScore === 5) {
-            gameResultDisplay.textContent = `you win the game`
-        } else if (computerScore === 5) {
-            gameResultDisplay.textContent = `you lose the game`
-        }
+        endGame(playerScore, computerScore);
     }
 });
