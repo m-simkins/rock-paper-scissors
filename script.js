@@ -1,40 +1,66 @@
 const choices = ["rock", "paper", "scissors"];
-const choiceButtons = document.getElementById("choice-buttons");
-const resultDisplay = document.getElementById("result");
-const playerScoreDisplay = document.getElementById("player-score");
-const computerScoreDisplay = document.getElementById("computer-score");
-const playerChoiceDisplay = document.getElementById("player-choice");
-const computerChoiceDisplay = document.getElementById("computer-choice");
-const gameResultDisplay = document.getElementById("game-result");
+const choiceButtonGroup = document.querySelector("#choice-button-group");
+const choiceButtons = choiceButtonGroup.children;
+const resultDisplay = document.querySelector("#result-display");
+const playerScoreDisplay = document.querySelector("#player-score");
+const computerScoreDisplay = document.querySelector("#computer-score");
+const playerChoiceDisplay = document.querySelector("#player-choice");
+const computerChoiceDisplay = document.querySelector("#computer-choice");
 
-let playerScore = 0;
-let computerScore = 0;
-let playerChoice;
-let computerChoice;
-let gameResult;
+let playerScore;
+let computerScore;
 
-
-playerScoreDisplay.textContent = `${playerScore}`
-computerScoreDisplay.textContent = `${computerScore}`
-
-function playRound(playerChoice, computerChoice) {
-    if (playerChoice === computerChoice) {
-        gameResult = 'tie';
-    } else if (playerChoice === computerChoice + 1 || playerChoice === computerChoice - 2) {
-        gameResult = 'win';
-        playerScore++;
-    } else {
-        gameResult = 'lose';
-        computerScore++;
+function setButtons(buttonText) {
+    for (i = 0; i < choiceButtonGroup.children.length; i++) {
+        choiceButtons[i].textContent = `${buttonText}`;
+        choiceButtons[i].classList.toggle("starting");
     }
 }
 
-function displayResults(playerChoice, computerChoice, gameResult, playerScore, computerScore) {
+function startGame() {
+    playerScore = 0;
+    computerScore = 0;
+    
+    for (i = 0; i < choiceButtonGroup.children.length; i++) {
+        const choice = choices[i].valueOf();
+        choiceButtons[i].textContent = `${choice}`;
+        choiceButtons[i].classList.remove("starting");
+
+        playerScoreDisplay.textContent = `${playerScore}`
+        computerScoreDisplay.textContent = `${computerScore}`
+    }
+}
+
+startGame();
+
+function playRound(e) {
+    let playerChoice = Number(e.target.value);
+    let computerChoice = Math.floor((Math.random() * 3));
+    let roundResult;
+
+    if (playerChoice === computerChoice) {
+        roundResult = 'tie';
+    } else if (playerChoice === computerChoice + 1 || playerChoice === computerChoice - 2) {
+        roundResult = 'win';
+        playerScore++;
+    } else {
+        roundResult = 'lose';
+        computerScore++;
+    }
+
+    displayResults(playerChoice, computerChoice, roundResult, playerScore, computerScore);
+
+    if (playerScore === 5 || computerScore === 5) {
+        endGame(playerScore, computerScore);
+    }
+}
+
+function displayResults(playerChoice, computerChoice, roundResult, playerScore, computerScore) {
     playerChoiceDisplay.textContent = `${choices[playerChoice]}`
     
     computerChoiceDisplay.textContent = `${choices[computerChoice]}`
 
-    gameResultDisplay.textContent = `you ${gameResult} this round`;
+    resultDisplay.textContent = `you ${roundResult} this round`;
 
     playerScoreDisplay.textContent = `${playerScore}`;
 
@@ -43,21 +69,18 @@ function displayResults(playerChoice, computerChoice, gameResult, playerScore, c
 
 function endGame(playerScore, computerScore) {
     if (playerScore === 5) {
-        gameResultDisplay.textContent = `you win the game`
+        resultDisplay.textContent = `you win the game`
     } else if (computerScore === 5) {
-        gameResultDisplay.textContent = `you lose the game`
+        resultDisplay.textContent = `you lose the game`
     }
+
+    setButtons('play game');
 }
 
-choiceButtons.addEventListener("click", (e) => {
-    playerChoice = Number(e.target.value);
-    computerChoice = Math.floor((Math.random() * 3));
-    
-    playRound(playerChoice, computerChoice);
-
-    displayResults(playerChoice, computerChoice, gameResult, playerScore, computerScore);
-
-    if (playerScore === 5 || computerScore === 5) {
-        endGame(playerScore, computerScore);
+choiceButtonGroup.addEventListener("click", (e) => {
+    if (e.target.className === "starting") {
+        startGame();
+    } else {
+        playRound(e);
     }
 });
